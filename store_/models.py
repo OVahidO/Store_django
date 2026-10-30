@@ -19,6 +19,9 @@ class Product(models.Model):
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     promotion = models.ManyToManyField(Promotion)
 
+    class Meta:
+        ordering = ['title']
+
 class Customer(models.Model):
     MEMBERSHIP_BRONZE = 'B'
     MEMBERSHIP_SILVER = 'S'
@@ -33,9 +36,15 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=11)
+    phone = models.CharField(max_length=255)
     birth_date = models.DateField(null=True)
     membership = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
+
+    # def __str__(self):
+    #     return self.first_name + ' ' + self.last_name
+
+    # class Meta:
+    #     ordering = ['first_name']
 
 class Order(models.Model):
     PAYMENT_STATUS_COMPLETE = 'C'

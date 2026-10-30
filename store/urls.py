@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 
+admin.site.site_header = 'Store admin'
+admin.site.index_title = 'Admin'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('app_1.urls')),
